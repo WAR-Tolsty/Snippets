@@ -10,14 +10,14 @@ def index_page(request):
 
 
 def add_snippet_page(request):
-    
+
     if request.method == "GET":
         form  = SnippetForm()
         context = {
             'pagename': 'Добавление нового сниппета',
             'form': form,
         }
-    return render(request, 'pages/add_snippet.html', context)
+        return render(request, 'pages/add_snippet.html', context)
     
     if request.method == "POST":
         form = SnippetForm(request.POST)
