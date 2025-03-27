@@ -49,7 +49,30 @@ def snippet_detail(request, snippet_id: int):
         return render(request, "pages/snippet_detail.html", context)
     
 def snippet_edit(request, snippet_id: int):
-    pass
+    context = {"pagename": "Редактирование сниппета"}
+    try:
+        snippet = Snippet.objects.get(id=snippet_id)
+    except ObjectDoesNotExist:
+        return Http404
+    
+    if request.method == 'GET':
+        form = SnippetForm(instance=snippet)
+        return render(request, 'pages/add_snippet.html', {'form': form})
+
+
+    #if request.method == "GET":
+    #    context = {
+    #        'snippet': snippet,
+    #        'type': 'edit'
+    #    }
+    #    return render(request, 'pages/snippet_detail.html', context)
+    
+    if request.method == "POST":
+        data_form = request.POST
+        snippet.name = data_form['name']
+        snippet.code = data_form['code']
+        snippet.save()
+        return redirect('snippets-list')
 
 def snippet_delete(request, snippet_id: int):
     snippet = get_object_or_404(Snippet, id=snippet_id)
