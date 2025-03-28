@@ -140,7 +140,7 @@ def comments_add(request):
     if request.method == 'POST':
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            snippet_id = comment_form.get('snippet_id')
+            snippet_id = request.POST.get('snippet_id')
             snippet = Snippet.objects.get(id=snippet_id)
             comment = comment_form.save(commit=False)
             comment.author = request.user
