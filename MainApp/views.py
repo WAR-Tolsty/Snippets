@@ -98,7 +98,7 @@ def snippet_delete(request, snippet_id: int):
     return redirect('snippets-list')
 
 def create_user(request):
-    context = { 'pagename': 'Регистрация нового пользователя' },
+    context = { 'pagename': 'Регистрация нового пользователя' }
     if request.method == "GET":
         form  = UserRegistrationForm()
         context['form'] = form
